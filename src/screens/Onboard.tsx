@@ -1,21 +1,41 @@
+import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, StyleSheet } from 'react-native';
+import { Button } from 'react-native-paper';
+import { RootStackParamList } from '../navigation/RootNavigator';
 
-const Onboard = () => {
+type NavigationProp = StackNavigationProp<RootStackParamList, 'OnboardScreen'>
+
+interface OnboardProps {
+    navigation: NavigationProp
+}
+
+const Onboard = (props: OnboardProps) => {
     return (
-        <View style={styles.container}>
-            <Text>
-                Hello World
-            </Text>
-        </View>
+        <>
+            <ImageBackground
+                style={StyleSheet.absoluteFillObject}
+                source={require('../../assets/images/background.jpg')}
+                resizeMode={"stretch"}
+            />
+            <Button
+                style={styles.btn}
+                mode="contained"
+                onPress={() => props.navigation.navigate("LoginScreen")}
+            >
+                GİRİŞ
+            </Button>
+        </>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+    btn: {
+        position: "absolute",
+        top: '87.6%',
+        width: '61.1%',
+        alignSelf: 'center',
+        borderRadius: 70,
     },
 });
 
