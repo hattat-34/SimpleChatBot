@@ -11,13 +11,26 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { RootNavigator } from './navigation/RootNavigator';
+import { SafeAreaView } from 'react-native';
+
+const theme = {
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        primary: '#AC3964',
+    },
+};
 
 const App = () => {
     return (
-        <NavigationContainer>
-            <RootNavigator />
-        </NavigationContainer>
+        <PaperProvider theme={theme}>
+            <NavigationContainer>
+                <SafeAreaView />
+                <RootNavigator />
+            </NavigationContainer>
+        </PaperProvider>
     );
 };
 
