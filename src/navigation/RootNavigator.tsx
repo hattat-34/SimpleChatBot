@@ -4,11 +4,13 @@ import Chat from "../screens/Chat";
 import Login from "../screens/Login";
 import Onboard from "../screens/Onboard";
 import { View } from 'react-native';
+import Colors from '../styles/Colors'
+import { IconButton } from "react-native-paper"
 
 export type RootStackParamList = {
     OnboardScreen: undefined
     LoginScreen: undefined
-    ChatScreen: undefined
+    ChatScreen: { username: string }
 }
 
 const MainStack = createStackNavigator<RootStackParamList>();
@@ -21,7 +23,7 @@ export const RootNavigator = () => {
             screenOptions={{
                 title: '',
                 headerStyle: {
-                    backgroundColor: '#AC3964',
+                    backgroundColor: Colors.PRIMARY_COLOR,
                 },
                 headerTintColor: '#FFF',
                 cardOverlay: () => (
@@ -30,7 +32,15 @@ export const RootNavigator = () => {
                             flex: 1,
                             backgroundColor: 'rgba(93,70,144,.3)',
                         }}
-                    />)
+                    />
+                ),
+                headerRight: () => (
+                    <IconButton
+                        onPress={() => null}
+                        icon="menu" size={28}
+                        color="#FFF"
+                    />
+                )
             }}
         >
             <MainStack.Screen name={"OnboardScreen"} component={Onboard} options={{ headerShown: false }} />

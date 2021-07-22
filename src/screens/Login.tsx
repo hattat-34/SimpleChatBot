@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { ImageBackground, StyleSheet, View } from 'react-native'
 import { Button, Colors, Snackbar, Text, TextInput } from 'react-native-paper'
 import { RootStackParamList } from '../navigation/RootNavigator'
+import { fakeRequest } from '../utils/Mock'
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'LoginScreen'>
 
@@ -10,13 +11,18 @@ const Login = ({ navigation }: { navigation: NavigationProp }) => {
     const [username, setUsername] = useState("")
     const [mobile, setMobile] = useState("")
     const [warning, setWarning] = useState("")
+    const [loading, setLoading] = useState(false)
 
-    const onLogin = () => {
+    const onLogin = async () => {
         if (!username.trim() || !mobile.trim) {
             setWarning("Lütfen, ad soyad ve telefon numarası giriniz.")
             return;
         }
-        navigation.navigate("ChatScreen")
+
+        setLoading(true)
+        await fakeRequest(500)
+        navigation.navigate("ChatScreen", { username })
+        setLoading(false)
     }
     return (
         <>
@@ -28,14 +34,14 @@ const Login = ({ navigation }: { navigation: NavigationProp }) => {
             <View style={styles.inputContainer}>
                 <TextInput
                     style={{ backgroundColor: 'transparent' }}
-                    label="Ad Soyad"
+                    label="Full Name"
                     theme={{ colors: { text: '#FFF', placeholder: '#C7C7CD' } }}
                     underlineColor='#FFF'
                     onChangeText={text => setUsername(text)}
                 />
                 <TextInput
                     style={{ backgroundColor: 'transparent' }}
-                    label="GSM Numara"
+                    label="Mobile Phone"
                     theme={{ colors: { text: '#FFF', placeholder: '#C7C7CD' } }}
                     underlineColor='#FFF'
                     keyboardType="phone-pad"
@@ -43,11 +49,13 @@ const Login = ({ navigation }: { navigation: NavigationProp }) => {
                 />
             </View>
             <Button
+                disabled={loading}
+                loading={loading}
                 style={styles.btn}
                 mode="contained"
                 onPress={onLogin}
             >
-                DEVAM
+                ENTER
             </Button>
             <Snackbar
                 style={{ backgroundColor: Colors.red600 }}

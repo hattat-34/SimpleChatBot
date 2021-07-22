@@ -1,6 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react'
-import { ImageBackground, StyleSheet } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-paper';
 import { RootStackParamList } from '../navigation/RootNavigator';
 
@@ -18,24 +18,45 @@ const Onboard = (props: OnboardProps) => {
                 source={require('../../assets/images/background.jpg')}
                 resizeMode={"stretch"}
             />
-            <Button
-                style={styles.btn}
-                mode="contained"
-                onPress={() => props.navigation.navigate("LoginScreen")}
-            >
-                GİRİŞ
-            </Button>
+            <View style={styles.textContainer}>
+                <Text style={styles.text}>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                </Text>
+            </View>
+            <View style={styles.btnContainer}>
+                <Button
+                    style={styles.btn}
+                    mode="contained"
+                    onPress={() => props.navigation.navigate("LoginScreen")}
+                >
+                    LOGIN
+                </Button>
+            </View>
         </>
     );
 };
 
 const styles = StyleSheet.create({
+    btnContainer: {
+        flex: 0.2,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     btn: {
-        position: "absolute",
-        top: '87.6%',
         width: '61.1%',
-        alignSelf: 'center',
         borderRadius: 70,
+    },
+    textContainer: {
+        flex: 0.8,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        marginHorizontal: 40
+    },
+    text: {
+        fontFamily: 'ProximaNova-Bold',
+        color: '#FFF',
+        fontSize: 22,
+        textAlign: 'center',
     },
 });
 
