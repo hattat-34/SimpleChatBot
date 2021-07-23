@@ -117,7 +117,7 @@ const Chat = ({ route }: ChatStackProp) => {
                     onChangeText={text => setText(text)}
                     value={text}
                     keyboardType='default'
-                    returnKeyType='none'
+                    returnKeyType='send'
                 />
                 {text.length > 0 &&
                     <TouchableOpacity style={styles.regular.submit}

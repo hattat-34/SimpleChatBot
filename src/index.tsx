@@ -29,6 +29,7 @@ const App = () => {
             <NavigationContainer>
                 <SafeAreaView />
                 <RootNavigator />
+                <SafeAreaView />
             </NavigationContainer>
         </PaperProvider>
     );
